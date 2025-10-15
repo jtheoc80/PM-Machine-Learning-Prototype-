@@ -13,12 +13,21 @@ from typing import List, Dict, Optional, Any
 from pathlib import Path
 import logging
 
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import Chroma
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.docstore.document import Document
-from langchain.chains import RetrievalQA
-from langchain.llms.base import LLM
+try:
+    from langchain_community.embeddings import HuggingFaceEmbeddings
+    from langchain_community.vectorstores import Chroma
+    from langchain.text_splitter import RecursiveCharacterTextSplitter
+    from langchain.docstore.document import Document
+    from langchain.chains import RetrievalQA
+    from langchain.llms.base import LLM
+except ImportError:
+    # Fallback for older langchain versions
+    from langchain.embeddings import HuggingFaceEmbeddings
+    from langchain.vectorstores import Chroma
+    from langchain.text_splitter import RecursiveCharacterTextSplitter
+    from langchain.docstore.document import Document
+    from langchain.chains import RetrievalQA
+    from langchain.llms.base import LLM
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 import torch
 
