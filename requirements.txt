@@ -24,6 +24,12 @@ python-multipart>=0.0.6
 chromadb>=0.4.0
 faiss-cpu>=1.7.4
 
+# Postgres + pgvector (Supabase support)
+psycopg2-binary>=2.9.9
+SQLAlchemy>=2.0.0
+pgvector>=0.2.5
+supabase>=2.5.0
+
 # Configuration
 python-dotenv>=1.0.0
 pyyaml>=6.0

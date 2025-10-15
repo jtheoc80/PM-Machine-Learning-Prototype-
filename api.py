@@ -11,6 +11,10 @@ from fastapi import FastAPI, UploadFile, File, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import logging
+from dotenv import load_dotenv
+
+# Load environment variables from .env if present
+load_dotenv()
 
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
@@ -74,7 +78,8 @@ async def startup_event():
     logger.info("Starting Pressure Valve Expert API...")
     
     try:
-        agent = create_agent(model_name="gpt2")
+        model_name = os.getenv("MODEL_NAME", "gpt2")
+        agent = create_agent(model_name=model_name)
         data_processor = DataProcessor()
         web_collector = WebDataCollector()
         
