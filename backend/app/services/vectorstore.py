@@ -46,11 +46,16 @@ class VectorStore:
         return self.collection.count()
 
 
-_vector_store: Optional[VectorStore] = None
+_vector_store: Optional[object] = None
 
 
-def get_vector_store() -> VectorStore:
+def get_vector_store() -> object:
     global _vector_store
     if _vector_store is None:
-        _vector_store = VectorStore()
+        if _settings.vector_store_provider.lower() == "pgvector":
+            from backend.app.services.vectorstore_pg import PgVectorStore
+
+            _vector_store = PgVectorStore()
+        else:
+            _vector_store = VectorStore()
     return _vector_store

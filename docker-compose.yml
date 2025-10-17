@@ -5,12 +5,40 @@ services:
     container_name: prv-backend
     environment:
       - CHROMA_PERSIST_PATH=/data/chroma
+      - VECTOR_STORE_PROVIDER=${VECTOR_STORE_PROVIDER:-chroma}
       - LLM_PROVIDER=${LLM_PROVIDER:-openai}
       - OPENAI_API_KEY
       - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o-mini}
       - EMBEDDING_PROVIDER=${EMBEDDING_PROVIDER:-local}
       - SENTENCE_TRANSFORMER_MODEL=${SENTENCE_TRANSFORMER_MODEL:-sentence-transformers/all-MiniLM-L6-v2}
       - OPENAI_EMBEDDING_MODEL=${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
+      - EMBEDDING_DIM=${EMBEDDING_DIM:-384}
+      - PGVECTOR_DISTANCE=${PGVECTOR_DISTANCE:-cosine}
+      - PGVECTOR_IVFFLAT_LISTS=${PGVECTOR_IVFFLAT_LISTS:-100}
+      # Supabase / Postgres (optional)
+      - DATABASE_URL
+      - POSTGRES_HOST
+      - POSTGRES_PORT
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - SUPABASE_URL
+      - SUPABASE_ANON_KEY
+      - SUPABASE_SERVICE_ROLE_KEY
+      # Supabase / Postgres
+      - DATABASE_URL
+      - POSTGRES_HOST
+      - POSTGRES_PORT
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - SUPABASE_URL
+      - SUPABASE_ANON_KEY
+      - SUPABASE_SERVICE_ROLE_KEY
+      # pgvector settings
+      - EMBEDDING_DIM=${EMBEDDING_DIM:-384}
+      - PGVECTOR_DISTANCE=${PGVECTOR_DISTANCE:-cosine}
+      - PGVECTOR_IVFFLAT_LISTS=${PGVECTOR_IVFFLAT_LISTS:-100}
     volumes:
       - ./data:/data
     ports:
