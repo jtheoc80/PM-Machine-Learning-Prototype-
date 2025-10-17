@@ -239,3 +239,28 @@ This project is open source and available under the MIT License.
 ## Contact
 
 For questions or support, please open an issue on GitHub 
+
+## PRV Specialist Agent (PR branch Quick Start)
+
+This branch also includes an experimental backend (`backend/`) and UI (`ui/`).
+
+Environment variables:
+- `OPENAI_API_KEY` (if using OpenAI)
+- `LLM_PROVIDER` = `openai` | `ollama`
+- `OLLAMA_MODEL` (e.g., `llama3.1`)
+
+Run backend:
+```bash
+pip install -r requirements.txt
+uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
+```
+
+Run UI:
+```bash
+streamlit run ui/app.py
+```
+
+Additional endpoints:
+- POST `/api/upload`
+- POST `/api/crawl`
+- POST `/api/chat`
