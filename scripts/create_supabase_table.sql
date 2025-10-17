@@ -1,5 +1,5 @@
 -- SQL to run in your Supabase SQL editor once.
--- Creates documents table with a 384-dim embedding vector (matches all-MiniLM-L6-v2).
+-- Creates documents table with a 1536-dim embedding vector (matches OpenAI text-embedding-3-small).
 -- Also creates an RPC function `match_documents` to perform nearest-neighbor search.
 CREATE EXTENSION IF NOT EXISTS vector;
 
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS documents (
   timestamp timestamptz,
   text_content text,
   metadata jsonb,
-  embedding vector(384)     -- 384 dims for all-MiniLM-L6-v2
+  embedding vector(1536)     -- 1536 dims for text-embedding-3-small
 );
 
 -- Index for faster ANN (ivfflat recommended for larger datasets)
