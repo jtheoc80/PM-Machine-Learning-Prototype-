@@ -9,6 +9,10 @@ import sys
 import argparse
 import logging
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env if present
+load_dotenv()
 
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
