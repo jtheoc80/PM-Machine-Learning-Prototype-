@@ -107,12 +107,21 @@ The interactive mode provides a command-line interface:
 
 ## Configuration
 
-Edit `config.yaml` to customize:
+Edit `config.yaml` to customize, and use a `.env` file (see `.env.example`) or environment variables to configure runtime:
 
 - Model selection (change to other HuggingFace models)
 - Path configurations
 - LLM parameters (temperature, max length, etc.)
 - Vector store settings
+  - `VECTOR_STORE_PROVIDER=chroma` (default) or `pgvector` (Supabase Postgres)
+  - If `pgvector`, set `DATABASE_URL` from Supabase (SQLAlchemy connection string), or `POSTGRES_HOST/PORT/DB/USER/PASSWORD`. Optional: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`.
+  - The app auto-creates the `vector` extension, a `documents` table (id, content, metadata JSONB, embedding vector) and an IVFFLAT index.
+
+### Secrets to set
+
+- `OPENAI_API_KEY` (if using OpenAI for LLM and/or embeddings)
+- `DATABASE_URL` (Supabase): `postgresql+psycopg2://postgres:<PASSWORD>@db.<ref>.supabase.co:5432/postgres?sslmode=require`
+- Or: `POSTGRES_*` variables if not using `DATABASE_URL`
 - Web collection settings
 
 ## Advanced Usage
